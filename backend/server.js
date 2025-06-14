@@ -27,8 +27,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-app.options('*', cors(corsOptions)); // preflight
-
 // Separate CORS errors
 app.use((err, req, res, next) => {
   if (err.message && err.message.includes('not allowed by CORS')) {
