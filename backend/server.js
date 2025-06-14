@@ -27,8 +27,6 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-
-app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); // preflight
 
 // Separate CORS errors
