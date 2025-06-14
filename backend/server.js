@@ -17,6 +17,8 @@ const allowedOrigins = process.env.FRONTEND_URL
 
 app.use(cors({
   origin: (origin, cb) => {
+    console.log('[CORS] Origin header:', origin);
+    console.log('[CORS] Allowed list:', allowedOrigins);
     if (!origin) return cb(null, true);
     return allowedOrigins.includes(origin)
       ? cb(null, true)
@@ -35,7 +37,8 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ success: false, message: 'Something went wrong!', error: err.message });
 });
-
+console.log("🚀 FRONTEND_URL:", process.env.FRONTEND_URL);
+console.log("🚀 allowedOrigins:", allowedOrigins);
 
 // Body parser middleware
 app.use(express.json());
