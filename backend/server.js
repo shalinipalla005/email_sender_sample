@@ -15,15 +15,17 @@ const allowedOrigins = process.env.FRONTEND_URL
   .split(',')
   .map(o => o.trim().replace(/\/+$/, ''));
 
-const corsOptions = {
+app.use(cors({
   origin: (origin, cb) => {
     if (!origin) return cb(null, true);
     return allowedOrigins.includes(origin)
       ? cb(null, true)
       : cb(new Error(`Origin ${origin} not allowed by CORS`));
   },
-  credentials: true, 
-};
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 
 
 app.use(cors(corsOptions));
