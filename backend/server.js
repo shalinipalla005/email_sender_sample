@@ -17,15 +17,14 @@ const allowedOrigins = process.env.FRONTEND_URL
 
 const corsOptions = {
   origin: (origin, cb) => {
-    console.log('[CORS]  Origin header:', origin);          // ← add
-    console.log('[CORS]  Allowed list :', allowedOrigins);  // ← add
-    if (!origin) return cb(null, true); // Postman / curl
+    if (!origin) return cb(null, true);
     return allowedOrigins.includes(origin)
       ? cb(null, true)
       : cb(new Error(`Origin ${origin} not allowed by CORS`));
   },
-  // …rest unchanged
+  credentials: true, 
 };
+
 
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions)); // preflight
